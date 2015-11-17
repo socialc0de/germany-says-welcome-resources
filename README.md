@@ -7,4 +7,4 @@ Collection of resources like images, logos and scripts for "Germany Says Welcome
 Contains the current export of phrasebook from [Refugee Phrasebook](http://www.refugeephrasebook.de) and
 related scripts.
 
-=> [Phrasebook resources](phrasebook/Readme.md)
+=> /phrasebook
