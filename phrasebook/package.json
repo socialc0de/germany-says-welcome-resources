@@ -1,0 +1,16 @@
+{
+  "name": "gsw-phrasebook",
+  "version": "0.0.1",
+  "description": "Phrasebook related resources for 'Germany Says Welcome'.",
+  "main": "import.js",
+  "dependencies": {
+    "jsonfile": "^2.2.3",
+    "squel": "^4.2.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Jan Obladen <obladen@datenwelt.net>",
+  "license": "GPL-3.0"
+}
