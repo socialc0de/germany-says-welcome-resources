@@ -29,7 +29,7 @@ point for own development work.
 
 ### import.js
 
-An import script to import the `phrasebook.json` into the database define by `database.sql`. This script is a node.js
+An import script to import the `phrasebook.json` into the database defined by `database.sql`. This script is a node.js
 script and prints SQL instructions to be run by MySQL. Run this command to get started:
 
     npm install

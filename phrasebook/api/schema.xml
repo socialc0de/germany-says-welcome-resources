@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<database name="default" defaultIdMethod="native" defaultPhpNamingMethod="underscore">
+  <table name="phrasebook_categories" idMethod="native" phpName="PhrasebookCategories">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="lang" phpName="Lang" type="VARCHAR" size="12" primaryKey="true" required="true"/>
+    <column name="label" phpName="Label" type="VARCHAR" size="255" required="true"/>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+  <table name="phrasebook_phrases" idMethod="native" phpName="PhrasebookPhrases">
+    <column name="id" phpName="Id" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="lang" phpName="Lang" type="VARCHAR" size="12" primaryKey="true" required="true"/>
+    <column name="cat_id" phpName="CatId" type="INTEGER" primaryKey="true" required="true"/>
+    <column name="translation" phpName="Translation" type="LONGVARCHAR" required="true"/>
+    <foreign-key foreignTable="phrasebook_categories" name="fk_categories" onDelete="CASCADE" onUpdate="CASCADE">
+      <reference local="cat_id" foreign="id"/>
+      <reference local="lang" foreign="lang"/>
+    </foreign-key>
+    <index name="cat_id">
+      <index-column name="cat_id"/>
+    </index>
+    <index name="fk_categories">
+      <index-column name="cat_id"/>
+      <index-column name="lang"/>
+    </index>
+    <vendor type="mysql">
+      <parameter name="Engine" value="InnoDB"/>
+    </vendor>
+  </table>
+</database>
