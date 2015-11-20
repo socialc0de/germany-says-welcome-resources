@@ -8,3 +8,7 @@ Contains the current export of phrasebook from [Refugee Phrasebook](http://www.r
 related scripts.
 
 => /phrasebook
+
+## Links
+
+A collection of links to useful data can be found in the wiki
