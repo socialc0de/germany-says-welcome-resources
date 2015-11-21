@@ -28,21 +28,27 @@ with open("phrasebook.json") as jsonfile:
                     categories[int(category_id)]['translations'][language_code]['name'] = category_data['label']
 
             for phrase_id, phrase in category_data['phrases'].items():
-                if phrase_id not in phrases:
-                    phrases[phrase_id] = {"text_id": phrase_id, "translations":{language_code:{"phrase":phrase}}, "category":category_url}
+                pid = phrase_id.replace(".","_").replace("/","_")
+                if pid not in phrases:
+                    phrases[pid] = {"text_id": pid, "translations":{language_code:{"phrase":phrase}}, "category":category_url}
                 else:
-                    if language_code not in phrases[phrase_id]['translations']:
-                        phrases[phrase_id]['translations'][language_code] = {'phrase':phrase}
+                    if language_code not in phrases[pid]['translations']:
+                        phrases[pid]['translations'][language_code] = {'phrase':phrase}
                     else:
-                        phrases[phrase_id]['translations'][language_code]['name'] = phrase
+                        phrases[pid]['translations'][language_code]['name'] = phrase
 
 for category, category_data in categories.items():
-    req = requests.put("%s/api/phrasecategories/%s/"%(url,category),json=category_data,headers=headers)
+    req = requests.get("%s/api/phrasecategories/%s/"%(url,category),headers=headers)
     if req.status_code == 404:
         req = requests.post("%s/api/phrasecategories/"%url,json=category_data,headers=headers)
-    print("%d: %s" % (req.status_code,req.text))
+        print("%d: %s %s" % (req.status_code,req.text, category_data))
+    else:
+        req = requests.put("%s/api/phrasecategories/%s/"%(url,category),json=category_data,headers=headers)
 for phrase, phrase_data in phrases.items():
-    req = requests.put("%s/api/phrasebook/%s/"%(url,phrase),json=phrase_data,headers=headers)
+    req = requests.get("%s/api/phrasebook/%s/"%(url,phrase),headers=headers)
     if req.status_code == 404:
         req = requests.post("%s/api/phrasebook/"%url,json=phrase_data,headers=headers)
+        print("%d: %s %s" % (req.status_code,req.text, phrase_data))
+    else:
+        req = requests.put("%s/api/phrasebook/%s/"%(url,phrase),json=phrase_data,headers=headers)
     print("%d: %s" % (req.status_code,req.text))
